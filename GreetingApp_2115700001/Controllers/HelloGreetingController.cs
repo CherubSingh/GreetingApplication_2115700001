@@ -1,3 +1,4 @@
+using BusinessLayer.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ModelLayer.Model;
@@ -10,24 +11,26 @@ namespace YourNamespace.Controllers
     public class HelloGreetingController : ControllerBase
     {
         private readonly ILogger<HelloGreetingController> _logger;
-
-        public HelloGreetingController(ILogger<HelloGreetingController> logger)
+        private readonly IGreetingBL _greetingBL;
+        public HelloGreetingController(IGreetingBL greetingBL , ILogger<HelloGreetingController> logger)
         {
+            _greetingBL = greetingBL;
             _logger = logger;
         }
 
         /// <summary>
         /// Retrieves a welcome greeting from the API.
         /// </summary>
-        /// <returns>A ResponseModel containing a welcome message and current date.</returns>
+        
         [HttpGet]
         public IActionResult Get()
         {
             _logger.LogInformation("GET request received for greeting");
 
+            var greetingResult = _greetingBL.GetGreeting();
             var data = new
             {
-                Greeting = "Hello! Welcome to the API",
+                Greeting = greetingResult,
                 Date = DateTime.Now
             };
 
@@ -37,7 +40,7 @@ namespace YourNamespace.Controllers
                 Message = "Request successful",
                 Data = data
             };
-
+            _logger.LogInformation("GET request successful, returning response.");
             return Ok(response);
         }
 

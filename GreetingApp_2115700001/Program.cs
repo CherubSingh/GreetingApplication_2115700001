@@ -1,6 +1,9 @@
 ﻿using System.Reflection;
 using NLog;
 using NLog.Web;
+using RepositoryLayer.Interface;
+using BusinessLayer.Interface;
+using BusinessLayer.Service;
 
 //Implementing NLogger
 var logger = LogManager.Setup().LoadConfigurationFromFile("nlog.config").GetCurrentClassLogger();
@@ -28,6 +31,7 @@ try
     // Add services to the container.
 
     builder.Services.AddControllers();
+    builder.Services.AddScoped<IGreetingBL, GreetingBL>();
 
     var app = builder.Build();
 
