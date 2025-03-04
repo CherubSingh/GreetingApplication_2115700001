@@ -52,12 +52,12 @@ namespace YourNamespace.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] RequestModel request)
         {
-            _logger.LogInformation("POST request received with FirstName: {FirstName}, LastName: {LastName}, Email: {Email}", request.FirstName, request.LastName, request.Email);
+            _logger.LogInformation("POST request received with FirstName: {FirstName}, LastName: {LastName}}", request.FirstName, request.LastName);
 
+            var greetingResult = _greetingBL.GetGreeting(request.FirstName, request.LastName);
             var data = new
             {
-                Greeting = $"Hello {request.FirstName} {request.LastName}",
-                Email = request.Email,
+                Greeting = greetingResult,
                 ReceivedAt = DateTime.Now
             };
 
@@ -67,7 +67,6 @@ namespace YourNamespace.Controllers
                 Message = "Greeting created",
                 Data = data
             };
-
             return Ok(response);
         }
 
@@ -79,12 +78,11 @@ namespace YourNamespace.Controllers
         [HttpPut]
         public IActionResult Put([FromBody] RequestModel request)
         {
-            _logger.LogInformation("PUT request received with FirstName: {FirstName}, LastName: {LastName}, Email: {Email}", request.FirstName, request.LastName, request.Email);
+            _logger.LogInformation("PUT request received with FirstName: {FirstName}, LastName: {LastName}}", request.FirstName, request.LastName);
 
             var data = new
             {
                 FullName = $"{request.FirstName} {request.LastName}",
-                Email = request.Email,
                 UpdatedAt = DateTime.Now
             };
 
@@ -106,7 +104,7 @@ namespace YourNamespace.Controllers
         [HttpPatch]
         public IActionResult Patch([FromBody] RequestModel request)
         {
-            _logger.LogInformation("PATCH request received with FirstName: {FirstName}, LastName: {LastName}, Email: {Email}", request.FirstName, request.LastName, request.Email);
+            _logger.LogInformation("PATCH request received with FirstName: {FirstName}, LastName: {LastName}", request.FirstName, request.LastName);
 
             var data = new
             {
@@ -114,7 +112,6 @@ namespace YourNamespace.Controllers
                 {
                     FirstName = string.IsNullOrEmpty(request.FirstName) ? "Not updated" : request.FirstName,
                     LastName = string.IsNullOrEmpty(request.LastName) ? "Not updated" : request.LastName,
-                    Email = string.IsNullOrEmpty(request.Email) ? "Not updated" : request.Email
                 },
                 UpdatedAt = DateTime.Now
             };
