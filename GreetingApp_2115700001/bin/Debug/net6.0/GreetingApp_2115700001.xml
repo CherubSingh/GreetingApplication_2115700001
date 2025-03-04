@@ -8,7 +8,6 @@
             <summary>
             Retrieves a welcome greeting from the API.
             </summary>
-            <returns>A ResponseModel containing a welcome message and current date.</returns>
         </member>
         <member name="M:YourNamespace.Controllers.HelloGreetingController.Post(ModelLayer.Model.RequestModel)">
             <summary>
