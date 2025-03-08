@@ -55,5 +55,6 @@
             Get All Greeting Messages
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:YourNamespace.Controllers.HelloGreetingController.UpdateGreeting(System.Int32,System.String)" -->
     </members>
 </doc>
