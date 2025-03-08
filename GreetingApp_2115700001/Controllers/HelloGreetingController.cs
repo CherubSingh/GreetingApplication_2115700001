@@ -14,7 +14,7 @@ namespace YourNamespace.Controllers
     {
         private readonly ILogger<HelloGreetingController> _logger;
         private readonly IGreetingBL _greetingBL;
-        public HelloGreetingController(IGreetingBL greetingBL , ILogger<HelloGreetingController> logger)
+        public HelloGreetingController(IGreetingBL greetingBL, ILogger<HelloGreetingController> logger)
         {
             _greetingBL = greetingBL;
             _logger = logger;
@@ -23,7 +23,7 @@ namespace YourNamespace.Controllers
         /// <summary>
         /// Retrieves a welcome greeting from the API.
         /// </summary>
-        
+
         [HttpGet]
         public IActionResult Get()
         {
@@ -202,7 +202,8 @@ namespace YourNamespace.Controllers
         /// <summary>
         /// Update Greeting
         /// </summary>
-        /// <param name="id",string="message"> </param>
+        /// <param name="id"></param>
+        /// <param string="message"> </param>
         /// <returns></returns>
         [HttpPut]
         [Route("UpdateGreeting")]
@@ -216,6 +217,31 @@ namespace YourNamespace.Controllers
             }
             _logger.LogInformation("PUT response: {@Response}", response);
             return Ok(response);
+        }
+
+
+        /// <summary>
+        /// Delete Greeting Message
+        /// </summary>
+        /// <param name="id"></param>
+        /// <return></return>
+        [HttpDelete]
+        [Route("DeleteGreeting")]
+        public IActionResult DeleteGreeting(int id)
+        {
+            _logger.LogInformation("DELETE request received.");
+            var response = _greetingBL.DeleteGreeting(id);
+            if (response == false)
+            {
+                string error = "Greeting not found";
+                return Ok(error);
+            }
+            else
+            {
+                _logger.LogInformation("DELETE response: {@Response}", response);
+                string msg = "Greeting Deleted";
+                return Ok(msg);
+            }
         }
     }
 }
