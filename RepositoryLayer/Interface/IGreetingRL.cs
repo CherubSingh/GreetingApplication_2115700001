@@ -13,6 +13,7 @@ namespace RepositoryLayer.Interface
         GreetingEntity AddGreeting(SaveGreetingModel greetRequest);
 
         string GetGreetingById(int id);
+        List<string> GetAllGreetingMessage();
 
     }
 }

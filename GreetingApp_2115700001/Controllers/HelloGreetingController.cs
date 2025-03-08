@@ -185,5 +185,18 @@ namespace YourNamespace.Controllers
             _logger.LogInformation("GET response: {@Response}", response);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Get All Greeting Messages
+        /// </summary>
+        [HttpGet]
+        [Route("GetAllGreetingMessage")]
+        public IActionResult GetAllGreetingMessage()
+        {
+            _logger.LogInformation("GET request received.");
+            var response = _greetingBL.GetAllGreetingMessage();
+            _logger.LogInformation("GET response: {@Response}", response);
+            return Ok(response);
+        }
     }
 }

@@ -50,5 +50,10 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:YourNamespace.Controllers.HelloGreetingController.GetAllGreetingMessage">
+            <summary>
+            Get All Greeting Messages
+            </summary>
+        </member>
     </members>
 </doc>
