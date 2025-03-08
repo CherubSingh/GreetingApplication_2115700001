@@ -152,7 +152,11 @@ namespace YourNamespace.Controllers
             return Ok(response);
         }
 
-
+        /// <summary>
+        ///     Add Greeting
+        /// </summary>
+        /// <param name="greeting"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("AddGreeting")]
         public IActionResult AddGreeting(SaveGreetingModel greeting)
@@ -160,6 +164,25 @@ namespace YourNamespace.Controllers
             _logger.LogInformation("POST request received.");
             var response = _greetingBL.AddGreeting(greeting);
             _logger.LogInformation("POST response: {@Response}", response);
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Get Greeting by Id    
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetGreetingById")]
+        public IActionResult GetGreetingById(int id)
+        {
+            _logger.LogInformation("GET request received.");
+            var response = _greetingBL.GetGreetingById(id);
+            if (response == null)
+            {
+                return NotFound();
+            }
+            _logger.LogInformation("GET response: {@Response}", response);
             return Ok(response);
         }
     }
