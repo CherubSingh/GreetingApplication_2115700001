@@ -36,5 +36,19 @@
             </summary>
             <returns>A ResponseModel confirming deletion with a timestamp.</returns>
         </member>
+        <member name="M:YourNamespace.Controllers.HelloGreetingController.AddGreeting(ModelLayer.Model.SaveGreetingModel)">
+            <summary>
+                Add Greeting
+            </summary>
+            <param name="greeting"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YourNamespace.Controllers.HelloGreetingController.GetGreetingById(System.Int32)">
+            <summary>
+            Get Greeting by Id    
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
