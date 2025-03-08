@@ -1,4 +1,7 @@
 ﻿using BusinessLayer.Interface;
+using ModelLayer.Model;
+using RepositoryLayer.Entity;
+using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +12,14 @@ namespace BusinessLayer.Service
 {
     public class GreetingBL : IGreetingBL
     {
+        private readonly IGreetingRL _greetingRL;
+
+        public GreetingBL(IGreetingRL greetingRL)
+        {
+            _greetingRL = greetingRL;
+        }
+
+
         public string GetGreeting(string firstName = "", string lastName = "")
         {
             // Both first and last name provided
@@ -31,6 +42,12 @@ namespace BusinessLayer.Service
             {
                 return "Hello World";
             }
+        }
+
+        public GreetingEntity AddGreeting(SaveGreetingModel greetRequest)
+        {
+            var result = _greetingRL.AddGreeting(greetRequest);
+            return result;
         }
     }
 }

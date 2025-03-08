@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ModelLayer.Model;
 using System.Threading.Tasks;
+using RepositoryLayer.Service;
+using BusinessLayer.Service;
 
 namespace YourNamespace.Controllers
 {
@@ -147,6 +149,17 @@ namespace YourNamespace.Controllers
                 Data = data
             };
 
+            return Ok(response);
+        }
+
+
+        [HttpPost]
+        [Route("AddGreeting")]
+        public IActionResult AddGreeting(SaveGreetingModel greeting)
+        {
+            _logger.LogInformation("POST request received.");
+            var response = _greetingBL.AddGreeting(greeting);
+            _logger.LogInformation("POST response: {@Response}", response);
             return Ok(response);
         }
     }
