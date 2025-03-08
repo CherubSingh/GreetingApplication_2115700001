@@ -4,6 +4,9 @@ using NLog.Web;
 using RepositoryLayer.Interface;
 using BusinessLayer.Interface;
 using BusinessLayer.Service;
+using RepositoryLayer.Service;
+using RepositoryLayer.Context;
+using Microsoft.EntityFrameworkCore;
 
 //Implementing NLogger
 var logger = LogManager.Setup().LoadConfigurationFromFile("nlog.config").GetCurrentClassLogger();
@@ -13,6 +16,10 @@ try
     logger.Info("Application is starting...");
 
     var builder = WebApplication.CreateBuilder(args);
+    var connectionString = builder.Configuration.GetConnectionString("GreetingConnection");
+
+    builder.Services.AddDbContext<GreetingDbContext>(options => options.UseSqlServer(connectionString));
+
 
     //Configure NLog
     builder.Logging.ClearProviders();
@@ -32,6 +39,7 @@ try
 
     builder.Services.AddControllers();
     builder.Services.AddScoped<IGreetingBL, GreetingBL>();
+    builder.Services.AddScoped<IGreetingRL, GreetingRL>();
 
     var app = builder.Build();
 
@@ -39,6 +47,8 @@ try
     app.UseSwaggerUI();
 
     // Configure the HTTP request pipeline.
+
+    app.UseRouting();
 
     app.UseHttpsRedirection();
 
