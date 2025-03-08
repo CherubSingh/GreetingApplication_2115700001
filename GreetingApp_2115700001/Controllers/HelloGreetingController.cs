@@ -198,5 +198,24 @@ namespace YourNamespace.Controllers
             _logger.LogInformation("GET response: {@Response}", response);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Update Greeting
+        /// </summary>
+        /// <param name="id",string="message"> </param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("UpdateGreeting")]
+        public IActionResult UpdateGreeting(int id, string message)
+        {
+            _logger.LogInformation("PUT request received.");
+            var response = _greetingBL.UpdateGreeting(id, message);
+            if (response == null)
+            {
+                return NotFound();
+            }
+            _logger.LogInformation("PUT response: {@Response}", response);
+            return Ok(response);
+        }
     }
 }
